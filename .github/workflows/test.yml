@@ -34,3 +34,24 @@ jobs:
         run: |
           mkdir ${{ steps.get-datetime.outputs.datetime }}
           ls -la
+
+      - name: Create a file
+        id: file-exists
+        run: |
+          touch a_file.txt
+          if [ -e /path/to/myfile.txt ]; then
+            echo "index=True"  >> $GITHUB_OUTPUT
+          else
+            echo "index=False"  >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Run if exists
+        run: |
+          echo "Running if exists"
+        if: steps.file-exists.outputs.index == 'True'
+        
+        
+      - name: Run if not exists
+        run: |
+          echo "Running if not exists"
+        if: steps.file-exists.outputs.index == 'False'
