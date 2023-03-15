@@ -39,7 +39,7 @@ jobs:
         id: file-exists
         run: |
           touch a_file.txt
-          if [ -e /path/to/myfile.txt ]; then
+          if [ -e a_file.txt ]; then
             echo "index=True"  >> $GITHUB_OUTPUT
           else
             echo "index=False"  >> $GITHUB_OUTPUT
